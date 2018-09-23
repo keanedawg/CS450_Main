@@ -5,6 +5,15 @@ from sklearn.naive_bayes import GaussianNB
 
 iris = datasets.load_iris()
 
+
+class hardCodedModel:
+    def predict(self, test_arr):
+        return [0] * len(test_arr)
+class hard:
+    def fit(self, data_train, target_train):
+        return hardCodedModel()
+
+
 # Show the data (the attributes of each instance)
 #print(iris.data)
 
@@ -13,7 +22,6 @@ iris = datasets.load_iris()
 
 # Show the actual target names that correspond to each number
 #print(iris.target_names)
-
 
 #, y = np.arange(10).reshape((5, 2)), range(5)
 data_train, data_test, target_train, target_test = train_test_split(
@@ -24,7 +32,12 @@ data_train, data_test, target_train, target_test = train_test_split(
 #print(target_train)
 #print(target_test)
 
-classifier = GaussianNB()
+
+
+# Comment and Uncomment to switch to Gaussian algorithm.
+#classifier = GaussianNB()
+classifier = hard()
+
 model = classifier.fit(data_train, target_train)
 
 targets_predicted = model.predict(data_test)
