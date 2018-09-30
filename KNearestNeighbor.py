@@ -32,7 +32,7 @@ class NearestNeighbor:
 
 # Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
-    iris.data, iris.target, test_size=0.3, random_state=42)
+    iris.data, iris.target, test_size=0.3, random_state=39)
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB()
