@@ -47,7 +47,7 @@ classifier = NearestNeighbor()
 model = classifier.fit(data_train, target_train)
 targets_predicted = model.predict(data_test)
 
-# Useful for more accurately tuning any deviation.
+# Useful for more accurately tuning any deviation (Uncomment helpful for debugging)
 #print(targets_predicted)
 #print(target_test)
 
