@@ -3,9 +3,11 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 
+# Get iris data from somewhere
 iris = datasets.load_iris()
 
-
+# Our trained machine learning model is actually a class.
+# Thus, we can create multiple models trained with different sets
 class NearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr):
@@ -27,7 +29,7 @@ class NearestNeighbor:
 #print(iris.target_names)
 #################################################
 
-#, y = np.arange(10).reshape((5, 2)), range(5)
+# Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
     iris.data, iris.target, test_size=0.3, random_state=42)
 
@@ -35,6 +37,7 @@ data_train, data_test, target_train, target_test = train_test_split(
 #classifier = GaussianNB()
 classifier = NearestNeighbor()
 
+# Calls the function to train the data
 model = classifier.fit(data_train, target_train)
 
 # Print amount incorrectly guessed
