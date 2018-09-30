@@ -2,6 +2,7 @@ from sklearn import datasets
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
 
 # Get iris data from somewhere
 iris = datasets.load_iris()
@@ -33,9 +34,10 @@ class NearestNeighbor:
 data_train, data_test, target_train, target_test = train_test_split(
     iris.data, iris.target, test_size=0.3, random_state=42)
 
-# Comment and Uncomment to switch to Gaussian algorithm.
+# Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB()
-classifier = NearestNeighbor()
+classifier = KNeighborsClassifier(n_neighbors=1)
+#classifier = NearestNeighbor()
 
 # Calls the function to train the data
 model = classifier.fit(data_train, target_train)
