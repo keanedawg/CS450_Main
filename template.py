@@ -14,6 +14,7 @@ class NearestNeighborModel:
         return [0] * len(test_arr)
 class NearestNeighbor:
 
+    # init function should take in parameters (I.E. n_neighbors for NN algorithm)
     def __init__(self):
         return
 
