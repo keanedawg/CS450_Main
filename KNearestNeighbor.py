@@ -7,12 +7,15 @@ iris = datasets.load_iris()
 
 
 class NearestNeighborModel:
+    # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr):
         return [0] * len(test_arr)
 class NearestNeighbor:
+    # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
         return NearestNeighborModel()
 
+#################################################
 # USE THESE VALUES TO SHOWCASE DATA
 # Show the data (the attributes of each instance)
 #print(iris.data)
@@ -22,6 +25,7 @@ class NearestNeighbor:
 
 # Show the actual target names that correspond to each number
 #print(iris.target_names)
+#################################################
 
 #, y = np.arange(10).reshape((5, 2)), range(5)
 data_train, data_test, target_train, target_test = train_test_split(
@@ -33,9 +37,11 @@ classifier = NearestNeighbor()
 
 model = classifier.fit(data_train, target_train)
 
+# Print amount incorrectly guessed
 targets_predicted = model.predict(data_test)
 print(targets_predicted)
 print(target_test)
 
+# Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )
 print(error)
