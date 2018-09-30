@@ -33,7 +33,7 @@ class NearestNeighbor:
 data_train, data_test, target_train, target_test = train_test_split(
     iris.data, iris.target, test_size=0.3, random_state=42)
 
-# Comment and Uncomment to switch to Gaussian algorithm.
+# Comment and Uncomment to switch to between algorhithms.
 #classifier = GaussianNB()
 classifier = NearestNeighbor()
 
