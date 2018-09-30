@@ -12,11 +12,15 @@ iris = datasets.load_iris()
 class NearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr):
+        print("OMG THIS IS A TEST TO SHOW I GOT THIS CODE TO RUN!!!")
         return [0] * len(test_arr)
 class NearestNeighbor:
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
-        return NearestNeighborModel()
+        sn = NearestNeighborModel()
+        sn.data = data_train
+        sn.target_train = target_train
+        return sn
 
 #################################################
 # USE THESE VALUES TO SHOWCASE DATA
