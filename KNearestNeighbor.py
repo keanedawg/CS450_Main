@@ -11,24 +11,41 @@ iris = datasets.load_iris()
 # Thus, we can create multiple models trained with different sets
 class NearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
-    def predict(self, test_arr):
-        some_val = test_arr[0]
-        some_val2 = test_arr[1]
+    def predict(self, test_arr): # ASSUME K=3 FOR NOW, DELETE LATER
 
-        squared = list(map(lambda x: np.linalg.norm(x-some_val), test_arr))
-        print(squared)
+        
 
-        dist = np.linalg.norm(test_arr)
+        print(self.getNearestNeighbors(test_arr[0]))
 
-        print(dist)
         return [0] * len(test_arr)
 
+    # returns nearest neighbor classification
+    # k is number of neighbors, v is value to find neighbors for 
+    def getNearestNeighbors(self, v):  
+        # Get all the distances from the value V 
+        dists = list(map(lambda x: np.linalg.norm(x-v), self.id))
+        
+        
+        # Now sort them (note we sort both the dist data and the target data)
+        sot= [x for _,x in sorted(zip(self.ot, dists))] # sot = sorted output target
+
+        print(sot)
+
+        return self.k
+
+
 class NearestNeighbor:
+
+    def __init__(self, n_neighbors):
+        self.k = n_neighbors
+        return
+
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
         sn = NearestNeighborModel()
         sn.id = data_train # id = input data
         sn.ot = target_train # ot = output target
+        sn.k = self.k  
         return sn
 
 #################################################
@@ -50,7 +67,7 @@ data_train, data_test, target_train, target_test = train_test_split(
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB()
 #classifier = KNeighborsClassifier(n_neighbors=1)
-classifier = NearestNeighbor()
+classifier = NearestNeighbor(n_neighbors=3)
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
