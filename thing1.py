@@ -21,7 +21,7 @@ class hard:
 #print(iris.target)
 
 # Show the actual target names that correspond to each number
-#print(iris.target_names)
+print(iris.target_names)
 
 #, y = np.arange(10).reshape((5, 2)), range(5)
 data_train, data_test, target_train, target_test = train_test_split(
