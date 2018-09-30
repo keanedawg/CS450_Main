@@ -27,10 +27,9 @@ class NearestNeighborModel:
         
         
         # Now sort them (note we sort both the dist data and the target data)
-        sot= [x for _,x in sorted(zip(self.ot, dists))] # sot = sorted output target
+        sot = [x for _, x in sorted(zip(dists, self.ot))] # sot = sorted output target
 
-        print(sot)
-
+    
         return self.k
 
 
