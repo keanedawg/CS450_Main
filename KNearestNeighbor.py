@@ -43,13 +43,13 @@ data_train, data_test, target_train, target_test = train_test_split(
 #classifier = KNeighborsClassifier(n_neighbors=1)
 classifier = NearestNeighbor()
 
-# Calls the function to train the data
+# Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
-
-# Print amount incorrectly guessed
 targets_predicted = model.predict(data_test)
-print(targets_predicted)
-print(target_test)
+
+# Useful for more accurately tuning any deviation.
+#print(targets_predicted)
+#print(target_test)
 
 # Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )

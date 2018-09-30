@@ -37,11 +37,11 @@ data_train, data_test, target_train, target_test = train_test_split(
 #classifier = GaussianNB()
 classifier = NearestNeighbor()
 
-# Calls the function to train the data
+# Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
-
-# Print amount incorrectly guessed
 targets_predicted = model.predict(data_test)
+
+# Useful for more accurately tuning any deviation (Uncomment helpful for debugging)
 print(targets_predicted)
 print(target_test)
 
