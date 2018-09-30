@@ -40,8 +40,8 @@ data_train, data_test, target_train, target_test = train_test_split(
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB()
-classifier = KNeighborsClassifier(n_neighbors=1)
-#classifier = NearestNeighbor()
+#classifier = KNeighborsClassifier(n_neighbors=1)
+classifier = NearestNeighbor()
 
 # Calls the function to train the data
 model = classifier.fit(data_train, target_train)
