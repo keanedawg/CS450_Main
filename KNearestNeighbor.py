@@ -43,6 +43,26 @@ class NearestNeighbor:
         sn.k = self.k  
         return sn
 
+
+# Nearest Neighbor Model used to go above and beyond
+# This will use an KDTree just like SKLearn does
+# I will SKLearn's KDTree and not create my own
+class KDTreeNearestNeighborModel:
+    # Given an array, uses our algorithm to predict the result of each element
+    def predict(self, test_arr):
+        return [0] * len(test_arr)
+class KDTreeNearestNeighbor:
+
+    # init function should take in parameters (I.E. n_neighbors for NN algorithm)
+    def __init__(self):
+        return
+
+    # Gives array of input and output to help train the model
+    def fit(self, data_train, target_train):
+        return NearestNeighborModel()
+
+
+
 #################################################
 # USE THESE VALUES TO SHOWCASE DATA
 # Show the data (the attributes of each instance)
