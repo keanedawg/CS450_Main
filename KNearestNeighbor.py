@@ -12,25 +12,21 @@ iris = datasets.load_iris()
 class NearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr): # ASSUME K=3 FOR NOW, DELETE LATER
-
-        
-
-        print(self.getNearestNeighbors(test_arr[0]))
-
-        return [0] * len(test_arr)
+        # Calculates the result mapping every single value
+        result = list(map(lambda v: self.getNearestNeighbors(v), test_arr))
+        return result
 
     # returns nearest neighbor classification
     # k is number of neighbors, v is value to find neighbors for 
     def getNearestNeighbors(self, v):  
         # Get all the distances from the value V 
         dists = list(map(lambda x: np.linalg.norm(x-v), self.id))
-        
-        
         # Now sort them (note we sort both the dist data and the target data)
         sot = [x for _, x in sorted(zip(dists, self.ot))] # sot = sorted output target
-
-    
-        return self.k
+        ck = sot[:self.k] # ck = closest k neighbors
+        # This is a funky way of getting the mode
+        mode = max(set(ck), key=ck.count)
+        return mode
 
 
 class NearestNeighbor:
