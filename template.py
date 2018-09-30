@@ -13,6 +13,10 @@ class NearestNeighborModel:
     def predict(self, test_arr):
         return [0] * len(test_arr)
 class NearestNeighbor:
+
+    def __init__(self):
+        return
+
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
         return NearestNeighborModel()
