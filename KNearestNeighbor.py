@@ -14,7 +14,11 @@ class NearestNeighborModel:
     def predict(self, test_arr):
         some_val = test_arr[0]
         some_val2 = test_arr[1]
-        dist = np.linalg.norm(some_val-some_val2)
+
+        squared = list(map(lambda x: np.linalg.norm(x-some_val), test_arr))
+        print(squared)
+
+        dist = np.linalg.norm(test_arr)
 
         print(dist)
         return [0] * len(test_arr)
