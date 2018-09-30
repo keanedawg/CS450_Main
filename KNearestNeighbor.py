@@ -52,15 +52,15 @@ class KDTreeNearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr):
         return [0] * len(test_arr)
-class KDTreeNearestNeighbor:
 
+class KDTreeNearestNeighbor:
     # init function should take in parameters (I.E. n_neighbors for NN algorithm)
-    def __init__(self):
+    def __init__(self, n_neighbors):
         return
 
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
-        return NearestNeighborModel()
+        return KDTreeNearestNeighborModel()
 
 
 
@@ -82,8 +82,9 @@ data_train, data_test, target_train, target_test = train_test_split(
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB()
-#lassifier = KNeighborsClassifier(n_neighbors=3)
-classifier = NearestNeighbor(n_neighbors=3)
+#classifier = KNeighborsClassifier(n_neighbors=3)
+#classifier = NearestNeighbor(n_neighbors=3)
+classifier = KDTreeNearestNeighbor(n_neighbors=3)
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
