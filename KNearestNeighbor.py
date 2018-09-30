@@ -7,8 +7,8 @@ from sklearn.neighbors import KNeighborsClassifier
 # Get iris data from somewhere
 iris = datasets.load_iris()
 
-# Our trained machine learning model is actually a class.
-# Thus, we can create multiple models trained with different sets
+# Nearest Neighbor Model used to reach requirements
+# This is a naive approach to nearest neighbor
 class NearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr): # ASSUME K=3 FOR NOW, DELETE LATER
@@ -28,7 +28,7 @@ class NearestNeighborModel:
         mode = max(set(ck), key=ck.count)
         return mode
 
-
+# This gets the naive nearestNeighbor model
 class NearestNeighbor:
 
     def __init__(self, n_neighbors):
@@ -61,7 +61,7 @@ data_train, data_test, target_train, target_test = train_test_split(
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB()
-#classifier = KNeighborsClassifier(n_neighbors=1)
+#lassifier = KNeighborsClassifier(n_neighbors=3)
 classifier = NearestNeighbor(n_neighbors=3)
 
 # Calls the function to train the data then creates predictions
