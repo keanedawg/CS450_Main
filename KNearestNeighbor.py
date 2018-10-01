@@ -50,9 +50,11 @@ class NearestNeighbor:
 class KDTreeNearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr):
+        # initialize the KDTree with our data
         tr = KDTree(self.id) # tr = tree
-       # nd, ni = tr.query_radius()
-        print(self.id)
+        # sends test_arr through KDTree
+        res = tr.query(test_arr, k=self.k) # res = result
+        print(res)
        # print(nd)
        # print(ni)
         return [0] * len(test_arr)
