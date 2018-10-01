@@ -54,12 +54,10 @@ class KDTreeNearestNeighborModel:
         tr = KDTree(self.id) # tr = tree
         # sends test_arr through KDTree
         nd, ni = tr.query(test_arr, k=self.k) # nd = nearest-distance, ni = nearest indice
-        
-        # Next two 
-
+        # Transforms list of list of nearest neighbors to list of list of respective classifications
         c = list(map(lambda x: list(map(lambda y: self.ot[y], x)), ni)) # c = classifications
+        # Gets the Mode (most common type) of each list of respective classifications
         c = list(map(lambda ck: max(set(ck), key=ck.count), c))
-        print(c)
         return c
 
 class KDTreeNearestNeighbor:
