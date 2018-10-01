@@ -70,6 +70,7 @@ class KDTreeNearestNeighbor:
 
 #################################################
 # USE THESE VALUES TO SHOWCASE DATA
+
 # Show the data (the attributes of each instance)
 #print(iris.data)
 
@@ -78,6 +79,7 @@ class KDTreeNearestNeighbor:
 
 # Show the actual target names that correspond to each number
 #print(iris.target_names)
+
 #################################################
 
 # Splits the data randomly
