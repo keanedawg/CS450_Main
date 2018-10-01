@@ -97,13 +97,13 @@ class KDTreeNearestNeighbor:
 
 # Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
-    iris.data, iris.target, test_size=0.3, random_state=39)
+    iris.data, iris.target, test_size=0.3, random_state=55)
 
 # Comment and Uncomment to switch between various implementations
-#classifier = GaussianNB()
-#classifier = KNeighborsClassifier(n_neighbors=3)
-#classifier = NearestNeighbor(n_neighbors=3)
-classifier = KDTreeNearestNeighbor(n_neighbors=3)
+#classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
+#classifier = KNeighborsClassifier(n_neighbors=2)
+#classifier = NearestNeighbor(n_neighbors=2)
+classifier = KDTreeNearestNeighbor(n_neighbors=2)
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
