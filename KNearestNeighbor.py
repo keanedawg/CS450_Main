@@ -56,10 +56,14 @@ class KDTreeNearestNeighborModel:
 class KDTreeNearestNeighbor:
     # init function should take in parameters (I.E. n_neighbors for NN algorithm)
     def __init__(self, n_neighbors):
+        self.k = n_neighbors
         return
 
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
+        sn.id = data_train # id = input data
+        sn.ot = target_train # ot = output target
+        sn.k = self.k  
         return KDTreeNearestNeighborModel()
 
 
