@@ -16,7 +16,7 @@ iris = datasets.load_iris()
 # This is a naive approach to nearest neighbor
 class NearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
-    def predict(self, test_arr): # ASSUME K=3 FOR NOW, DELETE LATER
+    def predict(self, test_arr): 
         # Calculates the result mapping every single value
         result = list(map(lambda v: self.getNearestNeighbors(v), test_arr))
         return result
