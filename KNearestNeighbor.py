@@ -46,8 +46,7 @@ class NearestNeighbor:
 
 
 # Nearest Neighbor Model used to go above and beyond
-# This will use an KDTree just like SKLearn does
-# I will SKLearn's KDTree and not create my own
+# This uses SKLearn's KDTree and not my own
 class KDTreeNearestNeighborModel:
     # Given an array, uses our algorithm to predict the result of each element
     def predict(self, test_arr):
