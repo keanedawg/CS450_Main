@@ -38,7 +38,7 @@ class NearestNeighbor:
 
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
-        sn = NearestNeighborModel()
+        sn = NearestNeighborModel() # sn = self NearestNeighborModel
         sn.id = data_train # id = input data
         sn.ot = target_train # ot = output target
         sn.k = self.k  
@@ -60,6 +60,7 @@ class KDTreeNearestNeighbor:
 
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
+        sn = KDTreeNearestNeighborModel()
         sn.id = data_train # id = input data
         sn.ot = target_train # ot = output target
         sn.k = self.k  
