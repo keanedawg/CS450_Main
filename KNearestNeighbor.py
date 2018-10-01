@@ -1,3 +1,7 @@
+# COMMENTS:
+# With more time, I think it would've been fun to write my own KDTree
+# or implement someone else's like https://github.com/stefankoegl/kdtree
+
 from sklearn import datasets
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -60,6 +64,7 @@ class KDTreeNearestNeighborModel:
         c = list(map(lambda ck: max(set(ck), key=ck.count), c))
         return c
 
+# This gets the KD implemented nearestNeighbor model
 class KDTreeNearestNeighbor:
     # init function should take in parameters (I.E. n_neighbors for NN algorithm)
     def __init__(self, n_neighbors):
