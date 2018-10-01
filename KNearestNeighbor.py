@@ -24,7 +24,7 @@ class NearestNeighborModel:
         dists = list(map(lambda x: np.linalg.norm(x-v), self.id))
         # Now sort them (note we sort both the dist data and the target data)
         sot = [x for _, x in sorted(zip(dists, self.ot))] # sot = sorted output target
-        ck = sot[:self.k] # ck = closest k neighbors
+        ck = sot[:self.k] # ck = closest k neighbors (represented as indices)
         # This is a funky way of getting the mode
         mode = max(set(ck), key=ck.count)
         return mode
@@ -53,10 +53,11 @@ class KDTreeNearestNeighborModel:
         # initialize the KDTree with our data
         tr = KDTree(self.id) # tr = tree
         # sends test_arr through KDTree
-        res = tr.query(test_arr, k=self.k) # res = result
-        print(res)
-       # print(nd)
-       # print(ni)
+        nd, ni = tr.query(test_arr, k=self.k) # nd = nearest-distance, ni = nearest indice
+        # This is messy.
+        c = list(map(lambda x: list(map(lambda y: self.ot[y], x)), ni)) # c = classifications 
+        print(c)
+
         return [0] * len(test_arr)
 
 class KDTreeNearestNeighbor:
