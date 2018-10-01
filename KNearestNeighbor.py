@@ -54,11 +54,13 @@ class KDTreeNearestNeighborModel:
         tr = KDTree(self.id) # tr = tree
         # sends test_arr through KDTree
         nd, ni = tr.query(test_arr, k=self.k) # nd = nearest-distance, ni = nearest indice
-        # This is messy.
-        c = list(map(lambda x: list(map(lambda y: self.ot[y], x)), ni)) # c = classifications 
-        print(c)
+        
+        # Next two 
 
-        return [0] * len(test_arr)
+        c = list(map(lambda x: list(map(lambda y: self.ot[y], x)), ni)) # c = classifications
+        c = list(map(lambda ck: max(set(ck), key=ck.count), c))
+        print(c)
+        return c
 
 class KDTreeNearestNeighbor:
     # init function should take in parameters (I.E. n_neighbors for NN algorithm)
