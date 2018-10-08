@@ -1,7 +1,26 @@
 import pandas
 
-foo = pandas.read_csv("Data/cars.csv")
-print(foo)
+cars = pandas.read_csv("Data/cars.csv")
+
+
+def preprocess_cars_data(car_data):
+    car_data["buying"] = car_data["buying"].astype('category')
+    car_data["maint"] = car_data["maint"].astype('category')
+    car_data["doors"] = car_data["doors"].astype('category')
+    car_data["persons"] = car_data["persons"].astype('category')
+    car_data["lug_boot"] = car_data["lug_boot"].astype('category')
+    car_data["distr"] = car_data["distr"].astype('category')
+    car_data["safety"] = car_data["safety"].astype('category')
+    car_data["buying_cat"] = car_data["buying"].cat.codes
+    car_data["maint_cat"] = car_data["maint"].cat.codes
+    car_data["doors_cat"] = car_data["doors"].cat.codes
+    car_data["persons_cat"] = car_data["persons"].cat.codes
+    car_data["lug_boot_cat"] = car_data["lug_boot"].cat.codes
+    car_data["distr_cat"] = car_data["distr"].cat.codes
+    car_data["safety_cat"] = car_data["safety"].cat.codes
+    return car_data
+
+
 
 
 
@@ -21,7 +40,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # Choose Dataset
 myData = datasets.load_iris()
-#myData = foo
+#myData = car_data
 
 
 # Nearest Neighbor Model used to reach requirements
