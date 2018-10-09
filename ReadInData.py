@@ -1,5 +1,6 @@
 import pandas
 cars = pandas.read_csv("Data/cars.csv")
+au = 0 # something
 
 def preprocess_cars_data(car_data):
     car_data["buying"] = car_data["buying"].astype('category')
@@ -21,11 +22,11 @@ def preprocess_cars_data(car_data):
     return (car_data.values,  safety)
 
 def preprocess_au_data(au_data):
-    
     return (0,  0)
 
+# Select the type of data you wish to preprocess
 data_numpy = preprocess_cars_data(cars)
-data_numpy = preprocess_au_data(au)
+#data_numpy = preprocess_au_data(au)
 
 
 data = data_numpy[0]
