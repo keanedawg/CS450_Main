@@ -66,11 +66,12 @@ def preprocess_mpg_data(mpg_data):
     return (0,  0)
 
 
-preprocess_au_data(au)
+preprocess_mpg_data(au)
 
 # Select the type of data you wish to preprocess
 #data_numpy = preprocess_cars_data(cars)
-data_numpy = preprocess_au_data(au)
+#data_numpy = preprocess_au_data(au)
+data_numpy = preprocess_mpg_data(au)
 
 
 data = data_numpy[0]
