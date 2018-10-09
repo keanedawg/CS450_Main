@@ -156,8 +156,6 @@ def preprocess_mpg_data(mpg_data):
     # Drop Autism column (prevents interference with KNN algorithm)
     mpg = mpg_data["mpg"].values
     mpg_data = mpg_data.drop('mpg', axis=1)
-
-    print(mpg_data)
     return (mpg_data.values, mpg)
 
 
@@ -199,7 +197,7 @@ targets_predicted = model.predict(data_test)
 
 # Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )
-print(error)
+print("One-Run Accuracy Result: ", error)
 
 
 # I got some help getting Cross Validation set up using Blake Cromer's code posted on slack
@@ -213,6 +211,4 @@ classifier = KNeighborsClassifier(n_neighbors = 5)
 y_pred = cross_val_predict(classifier, data, target, cv=k_fold, n_jobs=1)
 accuracy_score = cross_val_score(classifier, data, target, cv=k_fold, n_jobs=1).mean()
 
-
-print(y_pred)
-print(accuracy_score)
+print("Cross-Validation Accuracy: ", accuracy_score)
