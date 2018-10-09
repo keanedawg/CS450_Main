@@ -9,6 +9,8 @@ from sklearn.neighbors import KNeighborsClassifier
 
 cars = pandas.read_csv("Data/cars.csv")
 au = pandas.read_csv("Data/au.csv")
+mpg = 0 # pandas.read_csv("Data/mpg")
+
 
 def preprocess_cars_data(car_data):
     car_data["buying"] = car_data["buying"].astype('category')
