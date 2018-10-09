@@ -16,7 +16,10 @@ def preprocess_cars_data(car_data):
     car_data["lug_boot"] = car_data["lug_boot"].cat.codes
     car_data["distr"] = car_data["distr"].cat.codes
     car_data["safety"] = car_data["safety"].cat.codes
-    return (car_data.values, car_data["safety"].values )
+    safety = car_data["safety"].values
+    car_data = car_data.drop('safety', axis=1)
+    print(car_data)
+    return (car_data.values,  safety)
 
 foo = preprocess_cars_data(cars)
 data = foo[0]
@@ -129,7 +132,7 @@ data_train, data_test, target_train, target_test = train_test_split(
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
 #classifier = KNeighborsClassifier(n_neighbors=2)
 #classifier = NearestNeighbor(n_neighbors=2)
-classifier = KDTreeNearestNeighbor(n_neighbors=2)
+classifier = KDTreeNearestNeighbor(n_neighbors=5)
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
