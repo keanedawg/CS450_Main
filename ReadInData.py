@@ -1,7 +1,8 @@
 import pandas
 from sklearn import datasets
 import numpy as np
-from sklearn.model_selection import train_test_split
+import sklearn.model_selection as model_selection
+#from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
@@ -136,20 +137,20 @@ def preprocess_au_data(au_data):
     au_data["ethnicity"] = au_data["ethnicity"].cat.codes
     au_data["age_desc"] = au_data["age_desc"].cat.codes
 
+    # Drop Autism column (prevents interference with KNN algorithm)
     autism = au_data["autism"].values
     au_data = au_data.drop('autism', axis=1)
 
-    print(au_data['age'])
     return (au_data.values,  autism)
 
 def preprocess_mpg_data(mpg_data):
+   # drop missing data
+    mpg_data = mpg_data.replace('?', np.nan)
+    mpg_data = mpg_data.dropna()
+    mpg_data = mpg_data.drop('car_name', axis=1)
+    mpg_data["hp"] = mpg_data["hp"].astype('float')
+
     print(mpg_data.dtypes)
-
-
-    #au_data["age"] = au_data["age"].astype('int8')
-    #au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
-
-
     return (0,  0)
 
 
@@ -170,7 +171,7 @@ data = data_numpy[0]
 target = data_numpy[1]
 
 # Splits the data randomly
-data_train, data_test, target_train, target_test = train_test_split(
+data_train, data_test, target_train, target_test = model_selection.train_test_split(
     data, target, test_size=0.3, random_state=55)
 
 # Comment and Uncomment to switch between various implementations
@@ -190,3 +191,38 @@ targets_predicted = model.predict(data_test)
 # Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )
 print(error)
+
+
+### ASA SKOUSEN'S PRACTICE DATA
+
+# Toy data set modeled off of the Iris data set
+data = [[3.0, 1.2, 4.5],
+        [2.8, 2.0, 5.6],
+        [1.4, 2.2, 5.2],
+        [2.5, 1.5, 6.3],
+        [3.1, 1.7, 5.7]]
+
+# Toy target set modeled off of the Iris target set
+target = [0, 0, 1, 2, 1]
+
+# The number of splits I want
+n = 10
+
+# Get the KFolder, telling it the number of ways you want it to be split and that you want the data to be
+# selected randomly.
+kf = model_selection.KFold(n_splits=n, shuffle=True)
+
+# Store what your classifier returns in a list. There are alternate ways of doing this step
+predictions = []
+
+# I put in print statements just so that you could see what it was doing
+for train_index, test_index in kf.split(data):
+    print(train_index) # See the list. Be the list.
+    print(test_index) # And do the same here
+    print(data[train_index]) # Proof that it gets those indexes
+    print(data[test_index]) # Notice that it collects different ones
+    # collect all of your predictions. This is optional, depending on what else you are doing.
+    predictions.append(classifier(data[train_index], # I don't know what your classifier does, but mine takes in all of these
+                                  data[test_index], 
+                                  target[train_index], # Notice that both target and data get indexed. This is important!
+                                  target[test_index]))
