@@ -66,6 +66,12 @@ def preprocess_au_data(au_data):
 
 def preprocess_mpg_data(mpg_data):
     print(mpg_data.dtypes)
+
+
+    #au_data["age"] = au_data["age"].astype('int8')
+    #au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
+
+
     return (0,  0)
 
 
@@ -73,7 +79,7 @@ preprocess_mpg_data(mpg)
 
 # Select the type of data you wish to preprocess
 #data_numpy = preprocess_cars_data(cars)
-#data_numpy = preprocess_au_data(au)
+data_numpy = preprocess_au_data(au)
 #data_numpy = preprocess_mpg_data(au)
 
 
@@ -180,8 +186,8 @@ data_train, data_test, target_train, target_test = train_test_split(
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
 #classifier = KNeighborsClassifier(n_neighbors=2)
-#classifier = NearestNeighbor(n_neighbors=2)
-classifier = KDTreeNearestNeighbor(n_neighbors=5)
+classifier = NearestNeighbor(n_neighbors=5)
+#classifier = KDTreeNearestNeighbor(n_neighbors=5)
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
