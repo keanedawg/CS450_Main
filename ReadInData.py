@@ -18,13 +18,11 @@ def preprocess_cars_data(car_data):
     car_data["safety"] = car_data["safety"].cat.codes
     safety = car_data["safety"].values
     car_data = car_data.drop('safety', axis=1)
-    print(car_data)
     return (car_data.values,  safety)
 
-foo = preprocess_cars_data(cars)
-data = foo[0]
-target = foo[1]
-print(data)
+car_numpy = preprocess_cars_data(cars)
+data = car_numpy[0]
+target = car_numpy[1]
 
 # Last weeks code
 from sklearn import datasets
