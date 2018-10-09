@@ -30,9 +30,32 @@ def preprocess_cars_data(car_data):
     return (car_data.values,  safety)
 
 def preprocess_au_data(au_data):
+    # drop missing data
     au_data = au_data.replace('?', np.nan)
     au_data = au_data.dropna()
-    print(au_data)
+
+    # label encode categorical data
+    au_data["gender"] = au_data["gender"].astype('category')
+    au_data["ethnicity"] = au_data["ethnicity"].astype('category')
+    au_data["age_desc"] = au_data["age_desc"].astype('category')
+    au_data["relation"] = au_data["relation"].astype('category')
+    au_data["class_asd"] = au_data["class_asd"].astype('category')
+    au_data["country_residence"] = au_data["country_residence"].astype('category')
+    au_data["born_with_jaundice"] = au_data["born_with_jaundice"].astype('category')
+    au_data["autism"] = au_data["autism"].astype('category')
+    au_data["used_screening_app_before"] = au_data["used_screening_app_before"].astype('category')
+    au_data["age"] = au_data["age"].astype('int8')
+    au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
+    au_data["autism"] = au_data["autism"].cat.codes
+    au_data["born_with_jaundice"] = au_data["born_with_jaundice"].cat.codes
+    au_data["country_residence"] = au_data["country_residence"].cat.codes
+    au_data["gender"] = au_data["gender"].cat.codes
+    au_data["class_asd"] = au_data["class_asd"].cat.codes
+    au_data["relation"] = au_data["relation"].cat.codes
+    au_data["ethnicity"] = au_data["ethnicity"].cat.codes
+    au_data["age_desc"] = au_data["age_desc"].cat.codes
+
+    print(au_data['age'])
     return (0,  0)
 
 
