@@ -1,14 +1,14 @@
 import pandas
 from sklearn import datasets
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.model_selection import cross_val_predict
-from sklearn.cross_validation import KFold, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.model_selection import cross_val_predict
 
 # Read in the data tables
 cars = pandas.read_csv("Data/cars.csv")
@@ -170,22 +170,22 @@ preprocess_mpg_data(mpg)
 
 # Select the table you to make predictions on
 #data_numpy = preprocess_cars_data(cars)
-#data_numpy = preprocess_au_data(au)
-data_numpy = preprocess_mpg_data(mpg) # Note you will need to use a regressor classifier
+data_numpy = preprocess_au_data(au)
+#data_numpy = preprocess_mpg_data(mpg) # Note you will need to use a regressor classifier
 
 
 data = data_numpy[0]
 target = data_numpy[1]
 
 # Splits the data randomly
-data_train, data_test, target_train, target_test = model_selection.train_test_split(
+data_train, data_test, target_train, target_test = train_test_split(
     data, target, test_size=0.3, random_state=55)
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
 #classifier = KNeighborsClassifier(n_neighbors=5)
-classifier = KNeighborsRegressor(n_neighbors=5) # A regression form of KNearestNeighbors
-#classifier = NearestNeighbor(n_neighbors=5)
+#classifier = KNeighborsRegressor(n_neighbors=5) # A regression form of KNearestNeighbors
+classifier = NearestNeighbor(n_neighbors=5)
 #classifier = KDTreeNearestNeighbor(n_neighbors=5)
 
 
@@ -202,3 +202,17 @@ error = 1.0 - np.mean( target_test != targets_predicted )
 print(error)
 
 
+# I got some help getting Cross Validation set up using Blake Cromer's code posted on slack
+# https://byui-cs450-18f.slack.com/archives/CCUAAC5UG/p1539029351000100
+
+# Applying K Fold Cross Validation and initializing classifier
+k_fold = KFold(n_splits=10, shuffle=True, random_state=7)
+classifier = KNeighborsClassifier(n_neighbors = 5)
+
+# Prediction and Accuracy Results
+y_pred = cross_val_predict(classifier, data, target, cv=k_fold, n_jobs=1)
+accuracy_score = cross_val_score(classifier, data, target, cv=k_fold, n_jobs=1).mean()
+
+
+print(y_pred)
+print(accuracy_score)
