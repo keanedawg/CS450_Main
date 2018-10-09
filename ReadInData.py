@@ -6,6 +6,7 @@ import sklearn.model_selection as model_selection
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsRegressor
 
 # Read in the data tables
 cars = pandas.read_csv("Data/cars.csv")
@@ -144,14 +145,18 @@ def preprocess_au_data(au_data):
     return (au_data.values,  autism)
 
 def preprocess_mpg_data(mpg_data):
-   # drop missing data
+    # drop missing data
     mpg_data = mpg_data.replace('?', np.nan)
     mpg_data = mpg_data.dropna()
     mpg_data = mpg_data.drop('car_name', axis=1)
     mpg_data["hp"] = mpg_data["hp"].astype('float')
 
-    print(mpg_data.dtypes)
-    return (0,  0)
+    # Drop Autism column (prevents interference with KNN algorithm)
+    mpg = mpg_data["mpg"].values
+    mpg_data = mpg_data.drop('mpg', axis=1)
+
+    print(mpg_data)
+    return (mpg_data.values, mpg)
 
 
 ###############################################
@@ -163,8 +168,8 @@ preprocess_mpg_data(mpg)
 
 # Select the table you to make predictions on
 #data_numpy = preprocess_cars_data(cars)
-data_numpy = preprocess_au_data(au)
-#data_numpy = preprocess_mpg_data(au)
+#data_numpy = preprocess_au_data(au)
+data_numpy = preprocess_mpg_data(mpg)
 
 
 data = data_numpy[0]
@@ -176,17 +181,19 @@ data_train, data_test, target_train, target_test = model_selection.train_test_sp
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
-classifier = KNeighborsClassifier(n_neighbors=5)
+#classifier = KNeighborsClassifier(n_neighbors=5)
+classifier = KNeighborsRegressor(n_neighbors=5)
 #classifier = NearestNeighbor(n_neighbors=5)
 #classifier = KDTreeNearestNeighbor(n_neighbors=5)
+
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
 targets_predicted = model.predict(data_test)
 
 # Useful for more accurately tuning any deviation (Uncomment helpful for debugging)
-#print(targets_predicted)
-#print(target_test)
+print(targets_predicted)
+print(target_test)
 
 # Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )
