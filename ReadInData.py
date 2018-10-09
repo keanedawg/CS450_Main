@@ -168,8 +168,8 @@ preprocess_mpg_data(mpg)
 
 # Select the table you to make predictions on
 #data_numpy = preprocess_cars_data(cars)
-data_numpy = preprocess_au_data(au)
-#data_numpy = preprocess_mpg_data(mpg) # Note you will need to use a regressor classifier
+#data_numpy = preprocess_au_data(au)
+data_numpy = preprocess_mpg_data(mpg) # Note you will need to use a regressor classifier
 
 
 data = data_numpy[0]
@@ -177,13 +177,13 @@ target = data_numpy[1]
 
 # Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
-    data, target, test_size=0.3, random_state=55)
+    data, target, test_size=0.3, random_state=7)
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
-#classifier = KNeighborsClassifier(n_neighbors=5)
-#classifier = KNeighborsRegressor(n_neighbors=5) # A regression form of KNearestNeighbors
-classifier = NearestNeighbor(n_neighbors=5)
+#classifier = KNeighborsClassifier(n_neighbors=3)
+classifier = KNeighborsRegressor(n_neighbors=35) # A regression form of KNearestNeighbors
+#classifier = NearestNeighbor(n_neighbors=5)
 #classifier = KDTreeNearestNeighbor(n_neighbors=5)
 
 
@@ -204,8 +204,9 @@ print("One-Run Accuracy Result: ", error)
 # https://byui-cs450-18f.slack.com/archives/CCUAAC5UG/p1539029351000100
 
 # Applying K Fold Cross Validation and initializing classifier
-k_fold = KFold(n_splits=10, shuffle=True, random_state=7)
-classifier = KNeighborsClassifier(n_neighbors = 5)
+k_fold = KFold(n_splits=5, shuffle=True, random_state=55)
+classifier = KNeighborsRegressor(n_neighbors = 45)
+#classifier = KNeighborsClassifier(n_neighbors = 35)
 
 # Prediction and Accuracy Results
 y_pred = cross_val_predict(classifier, data, target, cv=k_fold, n_jobs=1)
