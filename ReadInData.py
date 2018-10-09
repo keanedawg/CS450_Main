@@ -6,95 +6,15 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
 
-
+# Read in the data tables
 cars = pandas.read_csv("Data/cars.csv")
 au = pandas.read_csv("Data/au.csv")
 mpg = pandas.read_csv("Data/mpg.txt", delim_whitespace=True)
 
 
-def preprocess_cars_data(car_data):
-    car_data["buying"] = car_data["buying"].astype('category')
-    car_data["maint"] = car_data["maint"].astype('category')
-    car_data["doors"] = car_data["doors"].astype('category')
-    car_data["persons"] = car_data["persons"].astype('category')
-    car_data["lug_boot"] = car_data["lug_boot"].astype('category')
-    car_data["distr"] = car_data["distr"].astype('category')
-    car_data["safety"] = car_data["safety"].astype('category')
-    car_data["buying"] = car_data["buying"].cat.codes
-    car_data["maint"] = car_data["maint"].cat.codes
-    car_data["doors"] = car_data["doors"].cat.codes
-    car_data["persons"] = car_data["persons"].cat.codes
-    car_data["lug_boot"] = car_data["lug_boot"].cat.codes
-    car_data["distr"] = car_data["distr"].cat.codes
-    car_data["safety"] = car_data["safety"].cat.codes
-    safety = car_data["safety"].values
-    car_data = car_data.drop('safety', axis=1)
-    return (car_data.values,  safety)
-
-def preprocess_au_data(au_data):
-    # drop missing data
-    au_data = au_data.replace('?', np.nan)
-    au_data = au_data.dropna()
-
-    # label encode categorical data
-    # we will make family member with autism the target data
-    au_data["gender"] = au_data["gender"].astype('category')
-    au_data["ethnicity"] = au_data["ethnicity"].astype('category')
-    au_data["age_desc"] = au_data["age_desc"].astype('category')
-    au_data["relation"] = au_data["relation"].astype('category')
-    au_data["class_asd"] = au_data["class_asd"].astype('category')
-    au_data["country_residence"] = au_data["country_residence"].astype('category')
-    au_data["born_with_jaundice"] = au_data["born_with_jaundice"].astype('category')
-    #au_data["autism"] = au_data["autism"].astype('category')
-    au_data["used_screening_app_before"] = au_data["used_screening_app_before"].astype('category')
-    au_data["age"] = au_data["age"].astype('int8')
-    au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
-    #au_data["autism"] = au_data["autism"].cat.codes
-    au_data["born_with_jaundice"] = au_data["born_with_jaundice"].cat.codes
-    au_data["country_residence"] = au_data["country_residence"].cat.codes
-    au_data["gender"] = au_data["gender"].cat.codes
-    au_data["class_asd"] = au_data["class_asd"].cat.codes
-    au_data["relation"] = au_data["relation"].cat.codes
-    au_data["ethnicity"] = au_data["ethnicity"].cat.codes
-    au_data["age_desc"] = au_data["age_desc"].cat.codes
-
-    autism = au_data["autism"].values
-    au_data = au_data.drop('autism', axis=1)
-
-    print(au_data['age'])
-    return (au_data.values,  autism)
-
-def preprocess_mpg_data(mpg_data):
-    print(mpg_data.dtypes)
-
-
-    #au_data["age"] = au_data["age"].astype('int8')
-    #au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
-
-
-    return (0,  0)
-
-
-preprocess_mpg_data(mpg)
-
-# Select the type of data you wish to preprocess
-#data_numpy = preprocess_cars_data(cars)
-data_numpy = preprocess_au_data(au)
-#data_numpy = preprocess_mpg_data(au)
-
-
-data = data_numpy[0]
-target = data_numpy[1]
-
-# Last weeks code
-
-
-# Choose Dataset
-myData = datasets.load_iris()
-#myData = foo
-
-#print(dir(myData))
-#print(myData.target)
+###########################################
+#### NEAREST NEIGHBOR ALGORITHMS BEGIN ####
+###########################################
 
 # Nearest Neighbor Model used to reach requirements
 # This is a naive approach to nearest neighbor
@@ -163,21 +83,91 @@ class KDTreeNearestNeighbor:
         sn.k = self.k
         return sn
 
+###########################################
+#### NEAREST NEIGHBOR ALGORITHMS END   ####
+###########################################
+
+###########################################
+#### PREPROCESS FUNCTION DEFINITIONS   ####
+###########################################
+def preprocess_cars_data(car_data):
+    car_data["buying"] = car_data["buying"].astype('category')
+    car_data["maint"] = car_data["maint"].astype('category')
+    car_data["doors"] = car_data["doors"].astype('category')
+    car_data["persons"] = car_data["persons"].astype('category')
+    car_data["lug_boot"] = car_data["lug_boot"].astype('category')
+    car_data["distr"] = car_data["distr"].astype('category')
+    car_data["safety"] = car_data["safety"].astype('category')
+    car_data["buying"] = car_data["buying"].cat.codes
+    car_data["maint"] = car_data["maint"].cat.codes
+    car_data["doors"] = car_data["doors"].cat.codes
+    car_data["persons"] = car_data["persons"].cat.codes
+    car_data["lug_boot"] = car_data["lug_boot"].cat.codes
+    car_data["distr"] = car_data["distr"].cat.codes
+    car_data["safety"] = car_data["safety"].cat.codes
+    safety = car_data["safety"].values
+    car_data = car_data.drop('safety', axis=1)
+    return (car_data.values,  safety)
+
+def preprocess_au_data(au_data):
+    # drop missing data
+    au_data = au_data.replace('?', np.nan)
+    au_data = au_data.dropna()
+
+    # label encode categorical data
+    # we will make family member with autism the target data
+    au_data["gender"] = au_data["gender"].astype('category')
+    au_data["ethnicity"] = au_data["ethnicity"].astype('category')
+    au_data["age_desc"] = au_data["age_desc"].astype('category')
+    au_data["relation"] = au_data["relation"].astype('category')
+    au_data["class_asd"] = au_data["class_asd"].astype('category')
+    au_data["country_residence"] = au_data["country_residence"].astype('category')
+    au_data["born_with_jaundice"] = au_data["born_with_jaundice"].astype('category')
+    #au_data["autism"] = au_data["autism"].astype('category')
+    au_data["used_screening_app_before"] = au_data["used_screening_app_before"].astype('category')
+    au_data["age"] = au_data["age"].astype('int8')
+    au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
+    #au_data["autism"] = au_data["autism"].cat.codes
+    au_data["born_with_jaundice"] = au_data["born_with_jaundice"].cat.codes
+    au_data["country_residence"] = au_data["country_residence"].cat.codes
+    au_data["gender"] = au_data["gender"].cat.codes
+    au_data["class_asd"] = au_data["class_asd"].cat.codes
+    au_data["relation"] = au_data["relation"].cat.codes
+    au_data["ethnicity"] = au_data["ethnicity"].cat.codes
+    au_data["age_desc"] = au_data["age_desc"].cat.codes
+
+    autism = au_data["autism"].values
+    au_data = au_data.drop('autism', axis=1)
+
+    print(au_data['age'])
+    return (au_data.values,  autism)
+
+def preprocess_mpg_data(mpg_data):
+    print(mpg_data.dtypes)
 
 
-#################################################
-# USE THESE VALUES TO SHOWCASE DATA
+    #au_data["age"] = au_data["age"].astype('int8')
+    #au_data["used_screening_app_before"] = au_data["used_screening_app_before"].cat.codes
 
-# Show the data (the attributes of each instance)
-#print(iris.data)
 
-# Show the target values (in numeric format) of each instance
-#print(iris.target)
+    return (0,  0)
 
-# Show the actual target names that correspond to each number
-#print(iris.target_names)
 
-#################################################
+###############################################
+#### END PREPROCESS FUNCTION DEFINITIONS   ####
+###############################################
+
+
+preprocess_mpg_data(mpg)
+
+# Select the table you to make predictions on
+#data_numpy = preprocess_cars_data(cars)
+data_numpy = preprocess_au_data(au)
+#data_numpy = preprocess_mpg_data(au)
+
+
+data = data_numpy[0]
+target = data_numpy[1]
 
 # Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
