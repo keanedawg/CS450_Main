@@ -1,7 +1,5 @@
 import pandas
-
 cars = pandas.read_csv("Data/cars.csv")
-
 
 def preprocess_cars_data(car_data):
     car_data["buying"] = car_data["buying"].astype('category')
@@ -11,26 +9,21 @@ def preprocess_cars_data(car_data):
     car_data["lug_boot"] = car_data["lug_boot"].astype('category')
     car_data["distr"] = car_data["distr"].astype('category')
     car_data["safety"] = car_data["safety"].astype('category')
-    car_data["buying_cat"] = car_data["buying"].cat.codes
-    car_data["maint_cat"] = car_data["maint"].cat.codes
-    car_data["doors_cat"] = car_data["doors"].cat.codes
-    car_data["persons_cat"] = car_data["persons"].cat.codes
-    car_data["lug_boot_cat"] = car_data["lug_boot"].cat.codes
-    car_data["distr_cat"] = car_data["distr"].cat.codes
-    car_data["safety_cat"] = car_data["safety"].cat.codes
-    return car_data
+    car_data["buying"] = car_data["buying"].cat.codes
+    car_data["maint"] = car_data["maint"].cat.codes
+    car_data["doors"] = car_data["doors"].cat.codes
+    car_data["persons"] = car_data["persons"].cat.codes
+    car_data["lug_boot"] = car_data["lug_boot"].cat.codes
+    car_data["distr"] = car_data["distr"].cat.codes
+    car_data["safety"] = car_data["safety"].cat.codes
+    return (car_data.values, car_data["safety"].values )
 
-
-
-
-
-
-
-
-
+foo = preprocess_cars_data(cars)
+data = foo[0]
+target = foo[1]
+print(data)
 
 # Last weeks code
-
 from sklearn import datasets
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -40,8 +33,10 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # Choose Dataset
 myData = datasets.load_iris()
-#myData = car_data
+#myData = foo
 
+#print(dir(myData))
+#print(myData.target)
 
 # Nearest Neighbor Model used to reach requirements
 # This is a naive approach to nearest neighbor
@@ -128,7 +123,7 @@ class KDTreeNearestNeighbor:
 
 # Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
-    myData.data, myData.target, test_size=0.3, random_state=55)
+    data, target, test_size=0.3, random_state=55)
 
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
