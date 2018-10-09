@@ -1,6 +1,6 @@
 import pandas
 cars = pandas.read_csv("Data/cars.csv")
-au = 0 # something
+au = pandas.read_csv("Data/au.csv")
 
 def preprocess_cars_data(car_data):
     car_data["buying"] = car_data["buying"].astype('category')
