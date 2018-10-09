@@ -1,4 +1,12 @@
 import pandas
+from sklearn import datasets
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KDTree
+from sklearn.neighbors import KNeighborsClassifier
+
+
 cars = pandas.read_csv("Data/cars.csv")
 au = pandas.read_csv("Data/au.csv")
 
@@ -22,6 +30,8 @@ def preprocess_cars_data(car_data):
     return (car_data.values,  safety)
 
 def preprocess_au_data(au_data):
+    au_data = au_data.replace('?', np.nan)
+    au_data = au_data.dropna()
     print(au_data)
     return (0,  0)
 
@@ -37,12 +47,7 @@ data = data_numpy[0]
 target = data_numpy[1]
 
 # Last weeks code
-from sklearn import datasets
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KDTree
-from sklearn.neighbors import KNeighborsClassifier
+
 
 # Choose Dataset
 myData = datasets.load_iris()
