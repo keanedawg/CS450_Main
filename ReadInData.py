@@ -22,10 +22,14 @@ def preprocess_cars_data(car_data):
     return (car_data.values,  safety)
 
 def preprocess_au_data(au_data):
+    print(au_data)
     return (0,  0)
 
+
+preprocess_au_data(au)
+
 # Select the type of data you wish to preprocess
-data_numpy = preprocess_cars_data(cars)
+#data_numpy = preprocess_cars_data(cars)
 #data_numpy = preprocess_au_data(au)
 
 
