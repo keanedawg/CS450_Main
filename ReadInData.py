@@ -169,7 +169,7 @@ preprocess_mpg_data(mpg)
 # Select the table you to make predictions on
 #data_numpy = preprocess_cars_data(cars)
 #data_numpy = preprocess_au_data(au)
-data_numpy = preprocess_mpg_data(mpg)
+data_numpy = preprocess_mpg_data(mpg) # Note you will need to use a regressor classifier
 
 
 data = data_numpy[0]
@@ -182,7 +182,7 @@ data_train, data_test, target_train, target_test = model_selection.train_test_sp
 # Comment and Uncomment to switch between various implementations
 #classifier = GaussianNB() # Just a reference point, not really a nearestNeighbor algorithm
 #classifier = KNeighborsClassifier(n_neighbors=5)
-classifier = KNeighborsRegressor(n_neighbors=5)
+classifier = KNeighborsRegressor(n_neighbors=5) # A regression form of KNearestNeighbors
 #classifier = NearestNeighbor(n_neighbors=5)
 #classifier = KDTreeNearestNeighbor(n_neighbors=5)
 
@@ -192,44 +192,11 @@ model = classifier.fit(data_train, target_train)
 targets_predicted = model.predict(data_test)
 
 # Useful for more accurately tuning any deviation (Uncomment helpful for debugging)
-print(targets_predicted)
-print(target_test)
+#print(targets_predicted)
+#print(target_test)
 
 # Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )
 print(error)
 
 
-# ### ASA SKOUSEN'S PRACTICE DATA
-
-# # Toy data set modeled off of the Iris data set
-# data = [[3.0, 1.2, 4.5],
-#         [2.8, 2.0, 5.6],
-#         [1.4, 2.2, 5.2],
-#         [2.5, 1.5, 6.3],
-#         [3.1, 1.7, 5.7]]
-
-# # Toy target set modeled off of the Iris target set
-# target = [0, 0, 1, 2, 1]
-
-# # The number of splits I want
-# n = 10
-
-# # Get the KFolder, telling it the number of ways you want it to be split and that you want the data to be
-# # selected randomly.
-# kf = model_selection.KFold(n_splits=n, shuffle=True)
-
-# # Store what your classifier returns in a list. There are alternate ways of doing this step
-# predictions = []
- 
-# # I put in print statements just so that you could see what it was doing
-# for train_index, test_index in kf.split(data):
-#     print(train_index) # See the list. Be the list.
-#     print(test_index) # And do the same here
-#     print(data[train_index]) # Proof that it gets those indexes
-#     print(data[test_index]) # Notice that it collects different ones
-#     # collect all of your predictions. This is optional, depending on what else you are doing.
-#     predictions.append(classifier(data[train_index], # I don't know what your classifier does, but mine takes in all of these
-#                                   data[test_index], 
-#                                   target[train_index], # Notice that both target and data get indexed. This is important!
-#                                   target[test_index]))
