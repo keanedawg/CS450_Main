@@ -62,6 +62,9 @@ def preprocess_au_data(au_data):
     print(au_data['age'])
     return (au_data.values,  autism)
 
+def preprocess_mpg_data(mpg_data):
+    return (0,  0)
+
 
 preprocess_au_data(au)
 
