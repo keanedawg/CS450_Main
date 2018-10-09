@@ -1,12 +1,14 @@
 import pandas
 from sklearn import datasets
 import numpy as np
-import sklearn.model_selection as model_selection
-#from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import cross_val_predict
+from sklearn.cross_validation import KFold, cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
 
 # Read in the data tables
 cars = pandas.read_csv("Data/cars.csv")
