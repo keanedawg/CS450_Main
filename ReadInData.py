@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 cars = pandas.read_csv("Data/cars.csv")
 au = pandas.read_csv("Data/au.csv")
-mpg = 0 # pandas.read_csv("Data/mpg")
+mpg = pandas.read_csv("Data/mpg.txt", delim_whitespace=True)
 
 
 def preprocess_cars_data(car_data):
@@ -65,15 +65,16 @@ def preprocess_au_data(au_data):
     return (au_data.values,  autism)
 
 def preprocess_mpg_data(mpg_data):
+    print(mpg_data.dtypes)
     return (0,  0)
 
 
-preprocess_mpg_data(au)
+preprocess_mpg_data(mpg)
 
 # Select the type of data you wish to preprocess
 #data_numpy = preprocess_cars_data(cars)
 #data_numpy = preprocess_au_data(au)
-data_numpy = preprocess_mpg_data(au)
+#data_numpy = preprocess_mpg_data(au)
 
 
 data = data_numpy[0]
