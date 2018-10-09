@@ -1,3 +1,4 @@
+Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,age,gender,ethnicity,born_with_jaundice,autism,country_residence,used_screening_app_before,result,age_desc,relation,class_asd
 1,1,0,1,0,0,0,1,0,1,24,m,Latino,no,yes,Brazil,no,5,'18 and more',Self,NO
 1,1,0,1,1,0,1,1,1,1,27,m,Latino,yes,yes,Spain,no,8,'18 and more',Parent,YES
 1,1,0,1,0,0,1,1,0,1,35,f,White-European,no,yes,'United States',no,6,'18 and more',Self,NO
