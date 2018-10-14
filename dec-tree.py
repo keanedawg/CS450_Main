@@ -9,6 +9,8 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.model_selection import cross_val_predict
+from sklearn import tree
+
 
 # Read in the data tables
 cars = pandas.read_csv("Data/cars.csv")
