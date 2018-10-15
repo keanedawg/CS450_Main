@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 from sklearn import datasets
 import numpy as np
 import graphviz 
@@ -31,6 +31,17 @@ class NearestNeighbor:
     # Gives array of input and output to help train the model
     def fit(self, data_train, target_train):
         return NearestNeighborModel()
+
+
+#################################################
+#   Preprocessing Data
+#################################################
+def pp_iris(iris):
+    data1 = pd.DataFrame(data = np.c_[iris['data'], iris['target']],
+                         columns = iris['feature_names'] + ['target'])
+
+    return data1
+
 
 #################################################
 # USE THESE VALUES TO SHOWCASE DATA
