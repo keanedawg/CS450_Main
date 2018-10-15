@@ -75,3 +75,5 @@ def visualize_graph(clf):
     graph = graphviz.Source(dot_data) 
     graph.render("iris") 
     
+
+visualize_graph(clf)
