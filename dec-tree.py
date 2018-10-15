@@ -70,10 +70,13 @@ iris = load_iris()
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(iris.data, iris.target)
 
-def visualize_graph(clf):
-    dot_data = tree.export_graphviz(clf, out_file=None) 
+def visualize_graph(clf, name):
+    dot_data = tree.export_graphviz(clf, out_file=None, 
+                         feature_names=iris.feature_names,  
+                         class_names=iris.target_names,  
+                         filled=True, rounded=True,  
+                         special_characters=True) 
     graph = graphviz.Source(dot_data) 
-    graph.render("iris") 
-    
+    graph.render(name) 
 
-visualize_graph(clf)
+visualize_graph(clf, "iris")
