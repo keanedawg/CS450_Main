@@ -45,7 +45,7 @@ def pp_iris(iris):
     grp_names = [4, 5, 6, 7]
     data1['sl'] = pd.cut(data1['sepal length (cm)'], bins, labels=grp_names)
 
-    return data1
+    return data1.values
 
 
 #################################################
@@ -88,7 +88,7 @@ iris = load_iris()
 
 
 
-pp_iris(iris)
+iris = pp_iris(iris)
 
 
 clf = tree.DecisionTreeClassifier()
