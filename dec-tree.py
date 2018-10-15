@@ -46,11 +46,12 @@ class NearestNeighbor:
 
 # Splits the data randomly
 data_train, data_test, target_train, target_test = train_test_split(
-    iris.data, iris.target, test_size=0.3, random_state=42)
+    iris.data, iris.target, test_size=0.3, random_state=91)
 
 # Comment and Uncomment to switch to between algorhithms.
 #classifier = GaussianNB()
-classifier = NearestNeighbor()
+#classifier = NearestNeighbor()
+classifier = tree.DecisionTreeClassifier()
 
 # Calls the function to train the data then creates predictions
 model = classifier.fit(data_train, target_train)
