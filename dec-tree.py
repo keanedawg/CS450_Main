@@ -1,6 +1,7 @@
 import pandas
 from sklearn import datasets
 import numpy as np
+import graphviz 
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
@@ -10,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.model_selection import cross_val_predict
 from sklearn import tree
+from sklearn.datasets import load_iris
 
 # Get iris data from somewhere
 iris = datasets.load_iris()
@@ -61,3 +63,15 @@ print(target_test)
 # Print percentage correctly guessed
 error = 1.0 - np.mean( target_test != targets_predicted )
 print(error)
+
+
+
+iris = load_iris()
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(iris.data, iris.target)
+
+def visualize_graph(clf):
+    dot_data = tree.export_graphviz(clf, out_file=None) 
+    graph = graphviz.Source(dot_data) 
+    graph.render("iris") 
+    
